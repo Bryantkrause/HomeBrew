@@ -1,0 +1,24 @@
+{
+  "name": "HomeBrew",
+  "version": "1.0.0",
+  "description": "I am embarking on a journey and need to keep my thoughts centered. This app will help any game master keep all of their ideas in one place.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bryantkrause/HomeBrew.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bryantkrause/HomeBrew/issues"
+  },
+  "homepage": "https://github.com/Bryantkrause/HomeBrew#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
