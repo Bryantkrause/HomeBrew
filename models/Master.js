@@ -1,9 +1,9 @@
 module.exports = (model, Schema) => {
 
-    const User = new Schema({
+    const Master = new Schema({
       name: String,
       description: String,
-      player: { type: Schema.Types.ObjectId, ref: 'User' },
+      player: { type: Schema.Types.ObjectId, ref: 'Player' },
     }, { timestamps: { createdAt: 'birthday', updatedAt: 'lastUpdated' }})
-    return model('User', User)
+    return model('Master', Master)
   }
