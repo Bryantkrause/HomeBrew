@@ -1,9 +1,12 @@
 module.exports = (model, Schema) => {
 
-    const Master = new Schema({
-      name: String,
+    const Combat = new Schema({
+      initiative: Array,
+      round: Number,
+      damage: Number,
       description: String,
+      monster: [{ type: Schema.Types.ObjectId, ref: 'monster' }],
       player: [{ type: Schema.Types.ObjectId, ref: 'Player' }],
     }, { timestamps: { createdAt: 'birthday', updatedAt: 'lastUpdated' }})
-    return model('Master', Master)
+    return model('Combat', Combat)
   }

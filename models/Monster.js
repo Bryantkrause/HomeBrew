@@ -1,6 +1,6 @@
 module.exports = (model, Schema) => {
 
-    const Board = new Schema({
+    const Monster = new Schema({
       Name: String,
       Alignment: String,
       Senses: Object,
@@ -13,10 +13,6 @@ module.exports = (model, Schema) => {
       Abilities: Array,
       Languages: Array,
       Description: String,
-      owner: { type: Schema.Types.ObjectId, ref: 'User' },
-      table: [{ type: Schema.Types.ObjectId, ref: 'Table' }],
-      company: [{ type: Schema.Types.ObjectId, ref: 'Company' }],
-      members: [{ type: Schema.Types.ObjectId, ref: 'User' }]
     }, { timestamps: { createdAt: 'birthday', updatedAt: 'lastUpdated' }})
-    return model('Board', Board)
+    return model('Monster', Monster)
   }
