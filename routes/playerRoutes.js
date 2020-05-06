@@ -1,54 +1,44 @@
-const { User, Board, Table, Company } = require('../models')
+const {Player} = require('../models')
 
 module.exports = app => {
-    // retrieve all boards
-    app.get('/api/boards', (req, res) => {
-        Board.find()
-            .populate('employees')
-            .populate('table')
-            .populate('company')
-            .then(board => res.json(board))
-            .catch(e => console.log(e))
-    })
-
-    // retrieve one board
-    app.get('/api/boards/:id', (req, res) => {
-        Board.findOne({ _id: req.params.id })
-            .populate('table')
-            .populate('task')
-            .then(user => res.json(user))
-            .catch(e => console.log(e))
-    })
-    
-    // add a board 
-    app.post('/api/boards', (req, res) => {
-        console.log('adding board to database', req.body)
-        Board.create(req.body)
-            .then(response => {
-                console.log('board created', response)
-                //updating the User
-                User.updateOne({ _id: req.body.owner }, { $push: { boards: response._id } })
-                .then( r => console.log('boards post route updating user', r))
-                .catch( e => console.log('boards post route failed updating user', e))
-                res.json(response)
+    // add a single player
+    app.post('/api/player', (req, res) => {
+        Player.create(req.body)
+            .then(player => {
+                res.json(player)
             })
-            .catch(e => console.log(e)) // catch for Board.create
-
+            .catch(e => console.error(e))
     })
 
-    // update one board
-    app.put('/api/boards/:id', (req, res) => {
-      console.log("boards put route hit")
-        Board.updateOne({ _id: req.params.id }, { $set: req.body })
-        .then( r => console.log(res.json(r)))
-        .catch(e => console.log(e))
+    // get a single player
+    app.get('/api/player/:id', (req, res) => {
+        console.log('hit route for getting a single player')
+        Player.findOne({
+                _id: req.params.id
+            })
+            .then(task => res.json(task))
+            .catch(e => console.error(e))
     })
 
-    // remove one board
-    app.delete('/boards/:id', (req, res) => {
-        Board.deleteOne({ _id: req.params.id })
-            .then(board => res.json(board))
-            .catch(e => console.log(e))
+    // update a single player
+    app.put('/api/player/:id', (req, res) => {
+        Player.updateOne({
+                _id: req.params.id
+            }, {
+                $set: req.body
+            })
+            .then(player => res.json(player))
+            .catch(e => console.error(e))
+    })
+
+    app.delete('/api/player/:id', (req, res) => {
+        Player.deleteOne({
+                _id: req.params.id
+            })
+            .then(player => {
+                res.json(player)
+            })
+            .catch(e => console.error(e))
     })
 
 }
