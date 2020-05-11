@@ -1,10 +1,15 @@
-const {Player} = require('../models')
+const {Player, Master} = require('../models')
 
 module.exports = app => {
     // add a single player
     app.post('/api/player', (req, res) => {
         Player.create(req.body)
             .then(player => {
+                if(req.body.master){
+                    Master.updateOne({ master: req.body.master }, { $push: { player: user._id } })
+                        .then(user => res.json(user))
+                        .catch(e => console.log(e))
+                }
                 res.json(player)
             })
             .catch(e => console.error(e))
@@ -16,6 +21,14 @@ module.exports = app => {
         Player.findOne({
                 _id: req.params.id
             })
+            .then(task => res.json(task))
+            .catch(e => console.error(e))
+    })
+
+    // get all the players
+    app.get('/api/player', (req, res) => {
+        console.log('hit route for getting a single player')
+        Player.find()
             .then(task => res.json(task))
             .catch(e => console.error(e))
     })

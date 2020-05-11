@@ -17,6 +17,7 @@ module.exports = (model, Schema) => {
       languages: Array,
       description: String,
       owner: { type: Schema.Types.ObjectId, ref: 'User' },
+      Master: { type: Schema.Types.ObjectId, ref: 'Master' },
     }, { timestamps: { createdAt: 'birthday', updatedAt: 'lastUpdated' }})
     return model('Player', Player)
   }
